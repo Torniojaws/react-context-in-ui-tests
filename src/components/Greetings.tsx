@@ -1,7 +1,10 @@
-import { useContext } from "react";
-import { MyContext } from "../MyContext";
+import { useEffect } from "react";
+import { useMyContext } from "../MyContextProvider";
 
 export const Greetings = () => {
-  const myContext = useContext(MyContext);
-  return <p>Greetings, {myContext.currentUser}</p>;
+  const user = useMyContext().user;
+  useEffect(() => {
+    console.warn("User updated to", user);
+  }, [user]);
+  return <p>Greetings, {user}</p>;
 };

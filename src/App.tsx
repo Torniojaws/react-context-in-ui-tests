@@ -1,10 +1,13 @@
 import "./App.css";
 import { Greetings } from "./components/Greetings";
+import { MyContextProvider } from "./MyContextProvider";
 
 export const App = () => {
   return (
     <div className="App">
-      <Greetings />
+      <MyContextProvider>
+        <Greetings />
+      </MyContextProvider>
     </div>
   );
 };
