@@ -27,4 +27,10 @@ describe("App context API tests", () => {
     const linkElementRerender = screen.getByText(/New User/i);
     expect(linkElementRerender).toBeInTheDocument();
   });
+
+  // Eg. Context exposes its state setter, for example myContext().setMyParam(value)
+  // then that change should also reflect in the UI test here.
+  // The primary use case would be an initially empty array being populated after an
+  // async API call (mocked/intercepted during the UI test).
+  it.todo("displays updated data when context changes using a setter");
 });
