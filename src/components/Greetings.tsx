@@ -1,10 +1,16 @@
 import { useEffect } from "react";
-import { useMyContext } from "../MyContextProvider";
+import { useMyContext } from "../MyContext";
 
 export const Greetings = () => {
   const user = useMyContext().user;
+  const updateUser = useMyContext().setUser;
   useEffect(() => {
-    console.warn("User updated to", user);
+    console.log("user updated to", user);
   }, [user]);
-  return <p>Greetings, {user}</p>;
+  return (
+    <div>
+      <p>Greetings, {user}</p>
+      <button onClick={() => updateUser("A New User")}>Change user</button>
+    </div>
+  );
 };

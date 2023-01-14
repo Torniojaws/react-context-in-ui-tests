@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { Greetings } from "./Greetings";
-import { MyContext } from "../MyContextProvider";
+import { MyContext } from "../MyContext";
 
 describe("Testing greetings with context", () => {
   it("Displays a default user", () => {
@@ -10,17 +10,22 @@ describe("Testing greetings with context", () => {
   });
 
   it("Displays an updated user after state changes", () => {
-    const { rerender } = render(<Greetings />);
-    const element = screen.getByText(/Greetings, Default User/i);
-    expect(element).toBeInTheDocument();
-
-    // Update state and check the screen again
-    rerender(
-      <MyContext.Provider value={{ user: "Test User", setUser: () => {} }}>
+    const setUser = () => {};
+    const { rerender } = render(
+      <MyContext.Provider value={{ user: "Hello There", setUser }}>
         <Greetings />
       </MyContext.Provider>
     );
-    const updated = screen.getByText(/Greetings, Test User/i);
+    const element = screen.getByText(/Greetings, Hello There/i);
+    expect(element).toBeInTheDocument();
+
+    // Simulate the state being updated following an async API response
+    rerender(
+      <MyContext.Provider value={{ user: "General Kenobi", setUser }}>
+        <Greetings />
+      </MyContext.Provider>
+    );
+    const updated = screen.getByText(/Greetings, General Kenobi/i);
     expect(updated).toBeInTheDocument();
   });
 });

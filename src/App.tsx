@@ -1,6 +1,6 @@
 import "./App.css";
 import { Greetings } from "./components/Greetings";
-import { MyContextProvider } from "./MyContextProvider";
+import { MyContextProvider } from "./MyContext";
 
 export const App = () => {
   return (
